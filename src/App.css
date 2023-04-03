@@ -3,6 +3,28 @@
 }
 .Card-section {
   display: flex;
-  justify-content: space-evenly;
+  align-items: center;
+  justify-content: center;
   background-color: chartreuse;
+}
+.Form {
+  display: flex;
+  vertical-align: center;
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: cornflowerblue;
+  color: white;
+  margin-left: 10px;
+  height: 54px;
+  border-radius: 8px;
+  font-size: 18px;
+  transition: background-color, color 1s;
+  outline: skyblue;
+}
+
+.Spinner {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
