@@ -1,13 +1,16 @@
 import React, { Component, useState } from "react";
 import "./App.css";
 import axios from "axios";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 //COMPONENTS
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav"
 import CardProduct from "./components/CardProduct/CardProduct"
+import ErrorPage from "./components/ErrorPage/ErrorPage"
 import { TextField, Button } from "@mui/material";
 import Spinner from "./components/Spinner/Spinner"
+import { Domain } from "@mui/icons-material";
 
 //Api  https://fakestoreapi.com/products/
 
@@ -42,25 +45,36 @@ const App = () => {
         setValue("");//limpia lo escrito en el textField
       };
       return (
-      <div className="App">
-        <Header variable="Mercado Herrajes"/>
-        <Nav />
-          <form ClassName="Form" onSubmit={onSubmit}>
-            <TextField 
-              placeholder="Buscar producto" 
-              ClassName="TextField" 
-              variant="outlined"
-              onChange={onChange} //Evento que dispara la función OnChange 
-              value={value}
-            />
-            <Button variant="contained" ClassName="btn" type="submit">Buscar</Button>
-          </form>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={
+              <div className="App">
 
-        <div ClassName="Card-section">
-          {isLoading ? <Spinner ClassName="Spinner"/> : data.id ? <CardProduct data={data} /> : null}
-        </div>
-        
-      </div>
+                <Header variable="Mercado Herrajes"/>
+
+                <Nav />
+
+                <form ClassName="Form" onSubmit={onSubmit}>
+                  <TextField 
+                    placeholder="Buscar producto" 
+                    ClassName="TextField" 
+                    variant="outlined"
+                    onChange={onChange} //Evento que dispara la función OnChange 
+                    value={value}
+                  />
+                  <Button variant="contained" ClassName="btn" type="submit">Buscar</Button>
+                </form>
+
+                <div ClassName="Card-section">
+                  {isLoading ? <Spinner ClassName="Spinner"/> : data.id ? <CardProduct data={data} /> : null}
+                </div>
+                
+              </div>
+            }/>
+            <Route path="*" element={<ErrorPage />}/>
+            
+          </Routes>
+        </BrowserRouter>
       );
   };
 
