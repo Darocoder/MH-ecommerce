@@ -1,7 +1,5 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, UseEffect } from "react";
 import axios from "axios";
-import Header from "../../components/Header/Header";
-import Nav from "../../components/Nav/Nav"
 import CardProduct from "../../components/CardProduct/CardProduct"
 import { TextField, Button } from "@mui/material";
 import Spinner from "../../components/Spinner/Spinner"
@@ -39,10 +37,6 @@ function Home() {
     };
 return (
     <div className="App">
-
-        <Header variable="Mercado Herrajes"/>
-
-        <Nav />
 
         <form ClassName="Form" onSubmit={onSubmit}>
             <TextField 

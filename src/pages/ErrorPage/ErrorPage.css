@@ -1,3 +1,8 @@
 .ErrorPage {
     text-align: center;
 }
+
+.ErrorPage img {
+    height: 400px;
+    margin-top: 100px;
+}

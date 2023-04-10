@@ -1,24 +1,25 @@
 import "./Nav.css"
 import Shop from "../Shop/Shop"
+import { Link } from "react-router-dom"
 
 const Nav = () => {
     return(
         <nav ClassName="navigation">
             <ul ClassName="list-ul">
                 <li>
-                    <a href="">Inicio</a>
+                    <Link to="/">Inicio</Link>
                 </li>
                 <li>
-                <a href="">Productos</a>
+                    <Link to="/productos">Productos</Link>
                 </li>
                 <li>
-                <a href="">Cómo comprar</a>
+                    <Link to="/como-comprar">Cómo comprar</Link>
                 </li>
                 <li>
-                <a href="">Historia</a>
+                    <Link to="/historia">Historia</Link>
                 </li>
                 <li>
-                <a href="">Contacto</a>
+                    <Link to="/contacto">Contacto</Link>
                 </li>
                 <li>
                     <Shop />
