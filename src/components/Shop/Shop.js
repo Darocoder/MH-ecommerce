@@ -3,9 +3,9 @@ import "./Shop.css"
 
 const Shop = () => {
     return(
-        <div ClassName="Carrito" style={{ display: "flex" }}>
+        <div className="Carrito" style={{ display: "flex" }}>
             <ShoppingCartIcon sx={{ color: "green" }}/>
-            <span ClassName="Cantidad-carrito">3</span>
+            <span className="Cantidad-carrito">3</span>
         </div>
     );
 };

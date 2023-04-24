@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 
 const Nav = () => {
     return(
-        <nav ClassName="navigation">
-            <ul ClassName="list-ul">
+        <nav >
+            <ul >
                 <li>
                     <Link to="/">Inicio</Link>
                 </li>
@@ -22,7 +22,8 @@ const Nav = () => {
                     <Link to="/contacto">Contacto</Link>
                 </li>
                 <li>
-                    <Shop />
+                    <Link to="/cart"><Shop /></Link>
+
                 </li>
             </ul>
         </nav>

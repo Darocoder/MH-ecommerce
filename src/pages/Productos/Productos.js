@@ -13,11 +13,11 @@ const Productos = ()  => {
         setProductos(res.data)
         );
     },[]);
-    console.log(productos)
+    //console.log(productos)
   return (
         <div className="grillaProductos">
             {productos.map((producto) => {
-              console.log("El producto enviado en Producto.js es " + producto.id)
+            //  console.log("El producto enviado en Producto.js es " + producto.id)
               return(
                 <div key={producto.id}>
                   <Link to={`/producto/${producto.id}`}>

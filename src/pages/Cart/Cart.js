@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import CardProduct from "../../components/CardProduct/CardProduct";
 import axios from "axios";
-import "./Producto.css";
+import "./Cart.css";
 import { Link, useParams } from "react-router-dom"
 
-const Producto = ({incrementar})  => {
+const Cart = ()  => {
     const [producto, setProducto] = useState({})
 
     let {id} = useParams();
@@ -18,10 +18,10 @@ const Producto = ({incrementar})  => {
     //console.log(producto)
     return (
         <div className="Producto">               
-            <CardProduct incrementar={incrementar} data={producto}/>               
+            <CardProduct data={producto}/>               
         </div>  
         );                        
 }
 
 
-export default Producto;
+export default Cart;

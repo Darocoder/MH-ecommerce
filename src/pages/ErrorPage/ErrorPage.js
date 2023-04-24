@@ -7,7 +7,7 @@ const ErrorPage = ({variable}) => {
         <div className="ErrorPage">
             <h1>Error 404</h1>
             <h3>La página existe</h3>
-            <img ClassName="404" src= {img} alt="Error 404"></img>
+            <img className="404" src= {img} alt="Error 404"></img>
         </div>
     );
 };
