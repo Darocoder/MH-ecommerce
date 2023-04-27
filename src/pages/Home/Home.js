@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom"
 
-import axios from "axios";
+
 import CardProduct from "../../components/CardProduct/CardProduct"
 import { TextField, Button } from "@mui/material";
 import Spinner from "../../components/Spinner/Spinner"
 import { Domain } from "@mui/icons-material";
+
 //FIREBASE
 import { db } from "../../firebase/firebaseConfig"
 import { collection, query, getDocs } from "firebase/firestore";
@@ -30,9 +31,14 @@ const Home = ({carrito, incrementar}) => {
       getProductos();
     }, []);
 
+    // limito a mostrar los primeros 4 productos
+      const primerosProductos = []
+      for (let i = 0 ; i < productos.length && i <= 3 ; i++){
+        primerosProductos.push(productos[i])
+      }
     return (
       <div className="grillaProductos">
-          {productos.map((data) => {
+          {primerosProductos.map((data) => {
           //  console.log("El producto enviado en Producto.js es " + producto.id)
             return(
               <div key={data.id}>

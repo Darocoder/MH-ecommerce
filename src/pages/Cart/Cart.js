@@ -3,23 +3,29 @@ import CardProduct from "../../components/CardProduct/CardProduct";
 import axios from "axios";
 import "./Cart.css";
 import { Link, useParams } from "react-router-dom"
+import { useContext } from 'react';
+import { Contexto } from "../../App";
 
 const Cart = ()  => {
-    const [producto, setProducto] = useState({})
 
-    let {id} = useParams();
+const contexto = useContext(Contexto)
+const contenidoCarrito = contexto.carrito
+console.log("Contenido Del Carrito:", contenidoCarrito)
 
-
-    useEffect(() => {
-        axios(`https://fakestoreapi.com/products/${id}`).then((res) =>
-        setProducto(res.data)
-        );
-    },[id]);
-    //console.log(producto)
+    
     return (
-        <div className="Producto">               
-            <CardProduct data={producto}/>               
-        </div>  
+        <div className="grillaProductos">
+          {contenidoCarrito.map((data) => {
+          
+            return(
+              <div key={data.id}>
+                <Link to={`/producto/${data.id}`}>
+                  <CardProduct id={data.id} data={data}/>
+                </Link>
+              </div>  
+            );                        
+        })}
+      </div>
         );                        
 }
 

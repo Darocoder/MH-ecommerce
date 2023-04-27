@@ -3,6 +3,11 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
+//FIREBASE
+import { db } from "./firebase/firebaseConfig"
+import { collection, query, getDocs, where } from "firebase/firestore";
+import { createContext } from "react";
+
 //COMPONENTES
 import Header from "./components/Header/Header"
 import Nav from "./components/Nav/Nav"
@@ -16,43 +21,71 @@ import Historia from "./pages/Historia/Historia"
 import Contacto from "./pages/Contacto/Contacto"
 import Producto from "./pages/Producto/Producto"
 import Cart from "./pages/Cart/Cart"
+//import { getPopoverUtilityClass } from "@mui/material";
 
-
-//Api  https://fakestoreapi.com/products/
+//Contexto de Carrito
+export const Contexto = createContext("Contexto inicial")
 
 //Renderizado de DOM
 const App = () => {
 
-  const [carrito, setCarrito] = useState(0)
+  const [productos, setProductos] = useState([]);
+  const [carrito, setCarrito] = useState([]);
 
-  function incrementar(){
-    setCarrito(carrito+5)
-    console.log("incrementando: "+ carrito)
+  const agregarAlCarrito = (nuevo) => {
+ 
+      if (!carrito.some(prod => prod === nuevo) ){
+        setCarrito(prev => [...prev, nuevo])
+      }else{
+        alert("Todavía no soportamos artículos repetidos, disculpe!")
+      }
   }
+
+
+  const vaciarCarrito = () => {
+    setCarrito([])
+}
+
+  const docs = [];
+  const q = query(collection(db, "productos"));//, where("categoria", "==", "Tornillos"));
+
+  useEffect(() => {
+    const getProductos = async() => {
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+          docs.push( {...doc.data(), id: doc.id} );
+      });
+     // console.log("docs", docs)
+      setProductos(docs)
+      console.log("productos: " , productos)
+    };
+    getProductos();
+  }, []);
+
   
-   
-
       return (
-        <BrowserRouter>
+        <Contexto.Provider value={     {productos, setProductos, carrito, agregarAlCarrito, vaciarCarrito}    }>
+          <BrowserRouter>
 
-        <div>
-          <Header variable="Mercado Herrajes"/>
-          <Nav />
-        </div>
+          <div>
+            <Header variable="Mercado Herrajes"/>
+            <Nav />
+          </div>
 
-          <Routes>
+            <Routes>
 
-            <Route path="/" carrito={carrito} incrementar={incrementar} element={<Home />}/>
-            <Route path="*" element={<ErrorPage />}/>
-            <Route path="productos" element={<Productos />}/>
-            <Route path="/producto/:id" carrito={carrito}  incrementar={incrementar} element={<Producto />}/>
-            <Route path="como-comprar" element={<ComoComprar />}/>
-            <Route path="historia" element={<Historia />}/>
-            <Route path="contacto" element={<Contacto />}/>
-            <Route path="cart" element={<Cart />}/>
-            
-          </Routes>
-        </BrowserRouter>
+              <Route path="/" element={<Home />}/>
+              <Route path="*" element={<ErrorPage />}/>
+              <Route path="productos" element={<Productos />}/>
+              <Route path="/producto/:id" element={<Producto />}/>
+              <Route path="como-comprar" element={<ComoComprar />}/>
+              <Route path="historia" element={<Historia />}/>
+              <Route path="contacto" element={<Contacto />}/>
+              <Route path="cart" element={<Cart />}/>
+              
+            </Routes>
+          </BrowserRouter>
+          </Contexto.Provider>
       );
   };
 

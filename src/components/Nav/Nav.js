@@ -1,8 +1,13 @@
 import "./Nav.css"
 import Shop from "../Shop/Shop"
 import { Link } from "react-router-dom"
+import Button from '@mui/material/Button';
+import { useContext } from "react";
+import { Contexto } from "../../App";
 
 const Nav = () => {
+    const contexto = useContext(Contexto)
+
     return(
         <nav >
             <ul >
@@ -23,7 +28,9 @@ const Nav = () => {
                 </li>
                 <li>
                     <Link to="/cart"><Shop /></Link>
-
+                </li>
+                <li>                   
+                    <Button onClick={ () => {contexto.vaciarCarrito();} } >Vaciar Carrito</Button>
                 </li>
             </ul>
         </nav>

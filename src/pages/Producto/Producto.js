@@ -4,21 +4,28 @@ import axios from "axios";
 import "./Producto.css";
 import { Link, useParams } from "react-router-dom"
 
-const Producto = ({incrementar})  => {
-    const [producto, setProducto] = useState({})
+import { useContext } from "react";
+import { Contexto } from "../../App";
 
+const Producto = ()  => {
+    let p = useContext(Contexto)
+    let productosTodos = p.productos
     let {id} = useParams();
-
-
-    useEffect(() => {
-        axios(`https://fakestoreapi.com/products/${id}`).then((res) =>
-        setProducto(res.data)
-        );
-    },[id]);
+    console.log("buscando el id " + id)
+    console.log("en " , productosTodos)
+    
+    let miProducto
+    productosTodos.forEach((producto) => {
+        if (producto.id === id){
+            miProducto = producto;
+        }
+    })
+console.log(miProducto)
+    
     //console.log(producto)
     return (
         <div className="Producto">               
-            <CardProduct incrementar={incrementar} data={producto}/>               
+            <CardProduct key={miProducto.id} data={miProducto}/>               
         </div>  
         );                        
 }

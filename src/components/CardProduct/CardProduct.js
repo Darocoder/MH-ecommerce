@@ -1,20 +1,20 @@
 import * as React from 'react';
-import { useState, useEffect } from "react";
-
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Link } from "react-router-dom";
+
+import { useContext } from 'react';
+import { Contexto } from "../../App";
 
 
 
-const CardProduct = ( {carrito, incrementar, id, data} ) => {
-function sarasa (){
-    console.log("sarasa")
-    incrementar()
-}
+const CardProduct = ( {data} ) => {
+    
+    const contexto = useContext(Contexto);
 
 return (
     <Card sx={{ margin: "10px" }}>
@@ -36,10 +36,16 @@ return (
         </Typography>
     </CardContent>
     <CardActions>
-        <Button onClick={sarasa} size="small">Agregar al carrito</Button>
+        <Button onClick={ () => {
+                    contexto.agregarAlCarrito(data);
+        } 
+    } size="small">Agregar al carrito</Button>
         <Button size="small">Comprar</Button>
     </CardActions>
     </Card>
 );
 }
 export default CardProduct;
+//        <Button size="small">Ver producto</Button> 
+
+//    <Link to={`/producto/${data.id}`}>

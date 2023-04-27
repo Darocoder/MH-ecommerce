@@ -4,25 +4,33 @@ import axios from "axios";
 import "./Productos.css";
 import Producto from "../Producto/Producto";
 import { Link } from "react-router-dom"
+import { useContext } from "react";
+import { Contexto } from "../../App";
 
 const Productos = ()  => {
-    const [productos, setProductos] = useState([])
+  let p = useContext(Contexto)
+  let productosTodos = p.productos
+  let listaSinDuplicados = []
 
-    useEffect(() => {
-        axios("https://fakestoreapi.com/products/").then((res) =>
-        setProductos(res.data)
-        );
-    },[]);
+  productosTodos.forEach((producto) => {
+    //Con ayuda de Eze, logro limpiar los duplicados.
+    let yaEstaba=false
+    listaSinDuplicados.forEach((sd) =>{
+        if (sd.id === producto.id)
+            yaEstaba = true
+    })
+    if (!yaEstaba)  {
+        listaSinDuplicados.push(producto)
+    }
+})
+
     //console.log(productos)
   return (
         <div className="grillaProductos">
-            {productos.map((producto) => {
-            //  console.log("El producto enviado en Producto.js es " + producto.id)
+            {listaSinDuplicados.map((producto) => {
               return(
-                <div key={producto.id}>
-                  <Link to={`/producto/${producto.id}`}>
+                <div key={producto.id}> 
                     <CardProduct key={producto.id} data={producto}/>
-                  </Link>
                 </div>  
               );                        
           })}
@@ -32,3 +40,6 @@ const Productos = ()  => {
 
 export default Productos;
 
+//<Link to={`/producto/${producto.id}`}>
+//<CardProduct key={producto.id} data={producto}/>
+//</Link>
