@@ -10,7 +10,7 @@ import { Contexto } from "../../App";
 
 
 
-const CardProduct = ( {data} ) => {
+const CardCategoria = ( {categoriasData} ) => {
     
     const contexto = useContext(Contexto);
 
@@ -18,24 +18,24 @@ return (
     <Card sx={{ margin: "10px" }}>
     <CardMedia sx={{height: "345px", maxWidth: "305px"}}
         component="img"
-        alt={data.categoria}
+        alt={categoriasData.categoria}
         height="auto"
-        image={data.img} 
+        image={categoriasData.img} 
     />
     <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-        {data.producto}
+        {categoriasData.producto}
         </Typography>
         <Typography variant="body1" color="text.primary">
-        u$s {data.precio}
+        u$s {categoriasData.precio}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        {data.modelo} 
+        {categoriasData.modelo} 
         </Typography>
     </CardContent>
     <CardActions>
         <Button onClick={ () => {
-                    contexto.agregarAlCarrito(data);
+                    contexto.agregarAlCarrito(categoriasData);
         } 
     } size="small">Agregar al carrito</Button>
         <Button size="small">Comprar</Button>
@@ -43,7 +43,4 @@ return (
     </Card>
 );
 }
-export default CardProduct;
-//        <Button size="small">Ver producto</Button> 
-
-//    <Link to={`/producto/${data.id}`}>
+export default CardCategoria;

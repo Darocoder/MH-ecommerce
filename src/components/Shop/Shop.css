@@ -1,6 +1,6 @@
 .Carrito {
     display: flex;
     vertical-align: middle;
-    background-color: aqua;
+    /*background-color: aqua;*/
     font-style: italic;
 }

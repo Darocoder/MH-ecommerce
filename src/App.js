@@ -21,6 +21,7 @@ import Historia from "./pages/Historia/Historia"
 import Contacto from "./pages/Contacto/Contacto"
 import Producto from "./pages/Producto/Producto"
 import Cart from "./pages/Cart/Cart"
+import Categorias from "./pages/Categorias/Categorias"
 //import { getPopoverUtilityClass } from "@mui/material";
 
 //Contexto de Carrito
@@ -82,6 +83,7 @@ const App = () => {
               <Route path="historia" element={<Historia />}/>
               <Route path="contacto" element={<Contacto />}/>
               <Route path="cart" element={<Cart />}/>
+              <Route path="/categoria/:categoria" element={<Categorias />}/>
               
             </Routes>
           </BrowserRouter>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import Button from '@mui/material/Button';
 import { useContext } from "react";
 import { Contexto } from "../../App";
+import MenuCategorias from "../MenuCategorias/MenuCategorias"
 
 const Nav = () => {
     const contexto = useContext(Contexto)
@@ -16,6 +17,9 @@ const Nav = () => {
                 </li>
                 <li>
                     <Link to="/productos">Productos</Link>
+                </li>
+                <li>
+                    <MenuCategorias />
                 </li>
                 <li>
                     <Link to="/como-comprar">Cómo comprar</Link>
