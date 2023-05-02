@@ -13,6 +13,8 @@
     border-color: rgb(9, 148, 173);
     border-style: groove;
     border-radius: 8px;
-    max-width: fit-content;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
     padding: 5px;
 }

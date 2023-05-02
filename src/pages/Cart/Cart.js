@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import CardProduct from "../../components/CardProduct/CardProduct";
-import axios from "axios";
 import "./Cart.css";
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useContext } from 'react';
 import { Contexto } from "../../App";
 import CartForm from "../../components/CartForm/CartForm"
@@ -13,7 +11,8 @@ const contexto = useContext(Contexto)
 const contenidoCarrito = contexto.carrito
 console.log("Contenido Del Carrito:", contenidoCarrito)
 
-    
+const precioTotal = contenidoCarrito.reduce((total, producto) => total + producto.precio, 0);
+
   return (
     <div>
       <div>
@@ -34,6 +33,7 @@ console.log("Contenido Del Carrito:", contenidoCarrito)
       </div>
       <div className="cantidad">
         <span value="cantidad">Productos agregados: {contexto.carrito.length}</span>
+        <span value="total">Valor total de la compra: u$s{precioTotal} </span>
       </div>
   </div>
       );                        

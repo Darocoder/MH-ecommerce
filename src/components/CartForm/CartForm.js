@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { useContext } from "react";
+import { Contexto } from "../../App"
+import firebase from "firebase/app"
+import firestore from "firebase/firestore"
 
 // Firebase
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 
 import "./CartForm.css";
@@ -28,6 +32,13 @@ const CartForm = () => {
   // Este estado está destinado a guardar el id de la compra
   const [purchaseID, setPurchaseID] = useState("");
 
+  // Obtenemos el carrito desde el contexto
+  const contexto = useContext(Contexto)
+  const contenidoCarrito = contexto.carrito
+
+  // Calculamos el total de la compra sumando los precios de todos los productos del carrito
+  const total = contenidoCarrito.reduce((total, producto) => total + producto.precio, 0)
+  
   const onChange = (e) => {
     const { value, name } = e.target;
     setValues({ ...values, [name]: value });
@@ -35,11 +46,13 @@ const CartForm = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // Add a new document with a generated id.
+    // Añadimos un nuevo documento con un ID generado
     const docRef = await addDoc(collection(db, "compras"), {
       values,
+      total,
+      contenidoCarrito,
     });
-    // console.log("Document written with ID: ", docRef.id);
+
     setPurchaseID(docRef.id);
     setValues(initialState);
   };
