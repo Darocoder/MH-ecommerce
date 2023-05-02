@@ -3,3 +3,16 @@
     flex-direction: column;
     align-items: center;
 }
+.cantidad {
+    font-weight: bold;
+    font-size: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px;
+    border-color: rgb(9, 148, 173);
+    border-style: groove;
+    border-radius: 8px;
+    max-width: fit-content;
+    padding: 5px;
+}

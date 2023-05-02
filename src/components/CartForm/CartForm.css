@@ -1,6 +1,5 @@
 .FormContainer {
 	display: flex;
-	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	margin: 20px;
@@ -11,12 +10,7 @@
 }
 
 .btnASendAction {
-	background: rgb(108, 14, 14);
-	background: radial-gradient(
-		circle,
-		rgba(108, 14, 14, 1) 77%,
-		rgba(172, 34, 34, 1) 100%
-	);
+	background: rgb(9, 148, 173);
 	color: white;
 	height: 54px;
 	width: 400px;
@@ -30,6 +24,6 @@
 
 .btnASendAction:hover {
 	color: red;
-	background: rgb(0, 0, 0);
+	background: rgb(21, 211, 4);
 	background: radial-gradient(circle, rgb(11, 4, 4) 77%, rgb(0, 0, 0) 100%);
 }

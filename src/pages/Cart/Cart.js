@@ -32,6 +32,9 @@ console.log("Contenido Del Carrito:", contenidoCarrito)
         );                        
       })}
       </div>
+      <div className="cantidad">
+        <span value="cantidad">Productos agregados: {contexto.carrito.length}</span>
+      </div>
   </div>
       );                        
 }
