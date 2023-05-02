@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 //FIREBASE
 import { db } from "./firebase/firebaseConfig"
-import { collection, query, getDocs, where } from "firebase/firestore";
+import { collection, query, getDocs } from "firebase/firestore";
 import { createContext } from "react";
 
 //COMPONENTES
@@ -34,17 +34,18 @@ const App = () => {
   const [carrito, setCarrito] = useState([]);
 
   const agregarAlCarrito = (nuevo) => {
- 
+      nuevo.cantidadCarrito++;
       if (!carrito.some(prod => prod === nuevo) ){
-        setCarrito(prev => [...prev, nuevo])
-      }else{
-        alert("Todavía no soportamos artículos repetidos, disculpe!")
+        setCarrito(prev => [...prev, nuevo,])
       }
+      console.log("CAntida de " +  nuevo.producto +  ": " + nuevo.cantidadCarrito)
   }
 
-
-  const vaciarCarrito = () => {
-    setCarrito([])
+function vaciarCarrito(){
+  carrito.forEach((data) => {      
+    data.cantidadCarrito = 0 
+  })
+  setCarrito([])
 }
 
   const docs = [];
@@ -54,9 +55,11 @@ const App = () => {
     const getProductos = async() => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-          docs.push( {...doc.data(), id: doc.id} );
+        let producto = {...doc.data(), id: doc.id, cantidadCarrito:0} 
+        if (!docs.some(producto => producto.id === doc.id)) //si el producto no esta en el array, lo agrego (asi evito duplicados)
+          docs.push(producto);
       });
-     // console.log("docs", docs)
+      
       setProductos(docs)
       console.log("productos: " , productos)
     };

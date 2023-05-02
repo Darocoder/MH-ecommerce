@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CardProduct from "../../components/CardProduct/CardProduct";
-import axios from "axios";
 import "./Producto.css";
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 import { useContext } from "react";
 import { Contexto } from "../../App";

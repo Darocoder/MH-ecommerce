@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { Contexto } from "../../App"
-import firebase from "firebase/app"
-import firestore from "firebase/firestore"
+
 
 // Firebase
-import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 
 import "./CartForm.css";
@@ -37,7 +36,7 @@ const CartForm = () => {
   const contenidoCarrito = contexto.carrito
 
   // Calculamos el total de la compra sumando los precios de todos los productos del carrito
-  const total = contenidoCarrito.reduce((total, producto) => total + producto.precio, 0)
+  const total = contenidoCarrito.reduce((total, producto) => total + producto.precio * producto.cantidadCarrito, 0)
   
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -59,7 +58,7 @@ const CartForm = () => {
 
   return (
     <div style={styles.containerShop}>
-      <h1>Formulario de compra</h1>
+      <h1>Carrito de compras</h1>
       <form className="FormContainer" onSubmit={onSubmit}>
         <TextField
           placeholder="Name"

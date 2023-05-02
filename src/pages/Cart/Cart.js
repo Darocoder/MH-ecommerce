@@ -10,8 +10,9 @@ const Cart = ()  => {
 const contexto = useContext(Contexto)
 const contenidoCarrito = contexto.carrito
 console.log("Contenido Del Carrito:", contenidoCarrito)
-
-const precioTotal = contenidoCarrito.reduce((total, producto) => total + producto.precio, 0);
+let acumulado = 0
+//const precioTotal = contenidoCarrito.reduce((total, producto) => total + producto.precio, 0);
+contenidoCarrito.forEach((data) => { acumulado += data.cantidadCarrito * data.precio })
 
   return (
     <div>
@@ -21,19 +22,18 @@ const precioTotal = contenidoCarrito.reduce((total, producto) => total + product
     
       <div className="grillaProductos">
         {contenidoCarrito.map((data) => {
-        
+        console.log("Carrito" ,data)
         return(
-          <div key={data.id}>
-            <Link to={`/producto/${data.id}`}>
+          <div className="subtotal" key={data.id}>
               <CardProduct id={data.id} data={data}/>
-            </Link>
+              Unidades:{data.cantidadCarrito} Subtotal: u$s{data.cantidadCarrito*data.precio}
           </div>  
         );                        
       })}
       </div>
       <div className="cantidad">
         <span value="cantidad">Productos agregados: {contexto.carrito.length}</span>
-        <span value="total">Valor total de la compra: u$s{precioTotal} </span>
+        <span value="total">Valor total de la compra: u$s{acumulado} </span>
       </div>
   </div>
       );                        

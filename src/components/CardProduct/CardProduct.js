@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useContext } from 'react';
 import { Contexto } from "../../App";
+import { Link } from "react-router-dom"
+
 
 
 
@@ -16,12 +18,16 @@ const CardProduct = ( {data} ) => {
 
 return (
     <Card sx={{ margin: "10px" }}>
+
+    <Link to={`/producto/${data.id}`}>
+    
     <CardMedia sx={{height: "345px", maxWidth: "305px"}}
         component="img"
         alt={data.categoria}
         height="auto"
         image={data.img} 
     />
+    </Link>
     <CardContent>
         <Typography gutterBottom variant="h5" component="div">
         {data.producto}
@@ -38,7 +44,6 @@ return (
                     contexto.agregarAlCarrito(data);
         } 
     } size="small">Agregar al carrito</Button>
-        <Button size="small">Comprar</Button>
     </CardActions>
     </Card>
 );

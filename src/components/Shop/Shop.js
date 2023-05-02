@@ -1,6 +1,5 @@
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import "./Shop.css";
-import { useEffect, useState } from 'react';
 import { useContext } from "react";
 import { Contexto } from "../../App";
 
