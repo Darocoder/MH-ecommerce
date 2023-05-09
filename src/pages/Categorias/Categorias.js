@@ -1,34 +1,30 @@
-import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 //Import de Firebase
-import { collection, query, getDocs, where } from "firebase/firestore";
-import { db } from "../../firebase/firebaseConfig";
+//import { collection, query, getDocs, where } from "firebase/firestore";
+//import { db } from "../../firebase/firebaseConfig";
+
+import { useContext } from "react";
+import { Contexto } from "../../App";
 
 import CardCategoria   from "../../components/CardCategoria/CardCategoria";
 
 //Componentes
 
 const Categorias = () => {
-  const [categoriaData, setCategoriaData] = useState([]);
+    const contexto = useContext(Contexto)
+
+//  const [categoriaData, setCategoriaData] = useState([]);
 
   let { categoria } = useParams();
+  let productosDeEstaCategoria = []
 
-  useEffect(() => {
-    const getCategorias = async () => {
-      const q = query(collection(db, "productos"), where("categoria", "==", categoria));
-      const docs = [];
-      const querySnapshot = await getDocs(q);
-      // console.log('DATA:', querySnapshot);
-      querySnapshot.forEach((doc) => {
-        // console.log('DATA:', doc.data(), 'ID:', doc.id);
-        docs.push({ ...doc.data(), id: doc.id });
-      });
-      // console.log(docs);
-      setCategoriaData(docs);
-    };
-    getCategorias();
-  }, [categoria]);
+  contexto.productos.forEach((producto) => {
+    if ((producto.categoria === categoria)) {
+      productosDeEstaCategoria.push(producto);
+      console.log("Producto: " , producto)
+    }}
+    )
 
   return (
     <div>
@@ -37,12 +33,15 @@ const Categorias = () => {
       </div>
       
       <div style={{ display: "flex", margin:"40px" }}>
-        {categoriaData.map((data) => {
+        {
+        productosDeEstaCategoria.map((data) => {
           return <CardCategoria className="cards" categoriasData={data} key={data.id} />;
-        })}
+          })
+        }
       </div>
     </div>
   );
-};
+      
+}  
 
 export default Categorias;

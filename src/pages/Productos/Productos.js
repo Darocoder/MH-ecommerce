@@ -3,7 +3,6 @@ import CardProduct from "../../components/CardProduct/CardProduct";
 import "./Productos.css";
 import { useContext } from "react";
 import { Contexto } from "../../App";
-import { Link } from "react-router-dom"
 
 
 const Productos = ()  => {

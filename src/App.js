@@ -34,8 +34,9 @@ const App = () => {
   const [carrito, setCarrito] = useState([]);
 
   const agregarAlCarrito = (nuevo) => {
+    console.log("Agregando al carrito", nuevo)
       nuevo.cantidadCarrito++;
-      if (!carrito.some(prod => prod === nuevo) ){
+      if (!carrito.some(prod => prod.id === nuevo.id) ){
         setCarrito(prev => [...prev, nuevo,])
       }
       console.log("CAntida de " +  nuevo.producto +  ": " + nuevo.cantidadCarrito)
